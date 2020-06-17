@@ -5,49 +5,45 @@
 #include <stdio.h>
 #include "cpp2c_defs_inheritance.h"
 
-/* definitions of class Material */
-
-const char* ZN9Materials7getNameENS_5TypesE(enum Types type)
-{
-    const char* const names[] = { "Plastic", "Metal", "Wood", "Paper", "Other" };
-    return names[type];
-}
-
 /* definitions of class PhysicalBox */
 
 void ZN11PhysicalBoxC1Eddd(PhysicalBox* const this, double l, double w, double h)
 {
     ZN3BoxC1Eddd((Box*)(this), l, w, h);
     this -> material.material = OTHER;
-    printf("Material created, set to %s\n", ZN9Materials7getNameENS_5TypesE(this -> material.material));
+    printf("Material created, set to %s\n", "Other");
     ZNK11PhysicalBox6printpEv(this);
 }
 
 void ZN11PhysicalBoxC1EdddN9Materials5TypesE(PhysicalBox* const this, double l, double w, double h, Types t)
 {
+    const char* const names[] = { "Plastic", "Metal", "Wood", "Paper", "Other" };
     ZN3BoxC1Eddd((Box*)(this), l, w, h);
     this -> material.material = t;
-    printf("Material created, set to %s\n", ZN9Materials7getNameENS_5TypesE(this -> material.material));
+    printf("Material created, set to %s\n", names[this -> material.material]);
     ZNK11PhysicalBox6printpEv(this);
 }
 
 void ZN11PhysicalBoxC1EN9Materials5TypesE(PhysicalBox* const this, Types t)
 {
+    const char* const names[] = { "Plastic", "Metal", "Wood", "Paper", "Other" };
     ZN3BoxC1Ed((Box*)(this), 1);
     this -> material.material = t;
-    printf("Material created, set to %s\n", ZN9Materials7getNameENS_5TypesE(this -> material.material));
+    printf("Material created, set to %s\n", names[this -> material.material]);
     ZNK11PhysicalBox6printpEv(this);
 }
 void ZN11PhysicalBoxD1Ev(PhysicalBox* const this)
 {
-    printf("PhysicalBox dtor, %f x %f x %f, %s; ", this -> length, this -> width, this -> height,
-            ZN9Materials7getNameENS_5TypesE(this -> material.material));
+    const char* const names[] = { "Plastic", "Metal", "Wood", "Paper", "Other" };
+    printf("PhysicalBox dtor, %f x %f x %f, %s; ", this -> box.length, this -> box.width, this -> box.height,
+           names[this -> material.material]);
     ZN3BoxD1Ev((Box*)this);
 }
 
 void ZNK11PhysicalBox6printpEv(const PhysicalBox* const this)
 {
-    printf("PhysicalBox, made of %s; ", ZN9Materials7getNameENS_5TypesE(this -> material.material));
+    const char* const names[] = { "Plastic", "Metal", "Wood", "Paper", "Other" };
+    printf("PhysicalBox, made of %s; ", names[this -> material.material]);
     ZNK3Box5printEv((Box*)this);
 }
 
